@@ -4,20 +4,37 @@
 // import Alert from "./components/alert";
 // import ListGroup from "./components/listGroup";
 
+import produce from "immer";
 import { useState } from "react";
 
 // import Like from "./components/like";
 
 function App() {
 
-  const [pizza,setPizza] = useState({
-    name: 'Spicy Pepperoni',
-    toppings: ['Mushroom']
-  });
+  const [rapper,setRapper] = useState([
+    { id: 1 , name :'biggy' , label : 'Columbia' },
+    { id: 2 , name :'Jay Z' , label : 'Self' }
+  ]);
 
-  const handleAddToping = () => {
-    setPizza({ ...pizza, toppings: [...pizza.toppings , 'Cheese'] })
+  const handleRapper = () => {
+    setRapper(produce(draft => {
+      const rapper = draft.find(rapper => rapper.id = 1);
+      if (rapper) rapper.label = 'self';
+    }))
   }
+
+  // const [pizza,setPizza] = useState({
+  //   name: 'Spicy Pepperoni',
+  //   toppings: ['Mushroom']
+  // });
+
+  // const handleRapperUpdate = () => {
+  //   setRapper(rapper.map( rap => rap.id == 1 ? {...rap , label : 'self'} : rap))
+  // }
+
+  // const handleAddToping = () => {
+  //   setPizza({ ...pizza, toppings: [...pizza.toppings , 'Cheese'] })
+  // }
 
   // const [alertVisible,setAlertVisible] = useState(false);
   
@@ -39,7 +56,8 @@ function App() {
 
       {/* <Like onClick={() => console.log('clicked')}/> */}
 
-      <button onClick={handleAddToping}>
+      {rapper.map(rap => <p key={rap.id}>{rap.name} : {rap.label}</p>)}
+      <button onClick={handleRapper}>
         Add
       </button>
 
