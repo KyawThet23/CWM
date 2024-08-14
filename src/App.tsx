@@ -4,7 +4,8 @@
 // import Alert from "./components/alert";
 // import ListGroup from "./components/listGroup";
 
-import FormState from "./components/formState";
+// import FormState from "./components/formState";
+import HookForm from "./components/hookForm";
 
 // import ExpandableText from "./components/expandableText";
 // import Form from "./components/form";
@@ -79,7 +80,9 @@ function App() {
 
       {/* <Form /> */}
 
-      <FormState />
+      {/* <FormState /> */}
+
+      <HookForm />
 
     </div>
   );
