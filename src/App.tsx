@@ -5,6 +5,7 @@
 // import ListGroup from "./components/listGroup";
 
 import ExpandableText from "./components/expandableText";
+import Form from "./components/form";
 
 // import produce from "immer";
 // import { useState } from "react";
@@ -70,9 +71,11 @@ function App() {
       <Navbar count={cartItems.length} />
       <Cart cartItem={cartItems} /> */}
 
-      <ExpandableText maxChar={10}>
+      {/* <ExpandableText maxChar={10}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, alias molestiae illum impedit vel soluta animi magni quod nostrum autem harum beatae ipsam? Vitae consectetur natus nam perferendis recusandae architecto earum non illum, asperiores rem facilis officiis voluptates repellendus sapiente provident tenetur omnis! Accusantium itaque, aut voluptatum nemo facere libero repudiandae inventore aliquid quas magnam. Itaque, natus! Nihil cumque dignissimos fugit repudiandae ratione nobis nemo quas quos deserunt aliquid commodi labore saepe quibusdam culpa nam reprehenderit voluptate at laborum possimus, eos ab molestias! Sint dicta rerum similique et qui assumenda sapiente, sequi, beatae asperiores commodi voluptate, explicabo numquam eum facere?
-      </ExpandableText>
+      </ExpandableText> */}
+
+      <Form />
 
     </div>
   );
