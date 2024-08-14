@@ -5,7 +5,10 @@
 // import ListGroup from "./components/listGroup";
 
 // import FormState from "./components/formState";
-import HookForm from "./components/hookForm";
+import { useState } from "react";
+import ExpenseList from "./components/expense-tracker/components/expenseList";
+import ExpenseFilter from "./components/expense-tracker/components/expenseFilter";
+// import HookForm from "./components/hookForm";
 
 // import ExpandableText from "./components/expandableText";
 // import Form from "./components/form";
@@ -18,7 +21,6 @@ import HookForm from "./components/hookForm";
 // import Like from "./components/like";
 
 function App() {
-
   // const [cartItems,setCartItems] = useState(['Product 1','Product 2']);
 
   // const [rapper,setRapper] = useState([
@@ -47,11 +49,24 @@ function App() {
   // }
 
   // const [alertVisible,setAlertVisible] = useState(false);
-  
+
   // const items = ["Mandalay", "Yangon", "Taunggyi", "Thibaw", "Naung cho"];
   // const handleSelectItem = (item : string) => {
   //   console.log(item)
   // }
+
+  const [selectCategory, setSelectedCategory] = useState("");
+
+  const [expenses, setExpenses] = useState([
+    { id: 1, description: "aaa", amount: 1.5, category: "Groceries" },
+    { id: 2, description: "bbb", amount: 1.5, category: "Utilities" },
+    { id: 3, description: "ccc", amount: 1.5, category: "Entertainment" },
+    { id: 4, description: "ddd", amount: 1.5, category: "Entertainment" },
+  ]);
+
+  const filterExpense = selectCategory
+    ? expenses.filter((e) => e.category === selectCategory)
+    : expenses;
 
   return (
     <div>
@@ -82,8 +97,17 @@ function App() {
 
       {/* <FormState /> */}
 
-      <HookForm />
+      {/* <HookForm /> */}
 
+      <div className="mb-3">
+        <ExpenseFilter
+          onSelectCategory={(category) => setSelectedCategory(category)}
+        />
+      </div>
+      <ExpenseList
+        expenses={filterExpense}
+        onDelete={(id) => setExpenses(expenses.filter((e) => e.id != id))}
+      />
     </div>
   );
 }
