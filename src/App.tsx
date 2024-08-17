@@ -8,6 +8,7 @@
 import { useState } from "react";
 import ExpenseList from "./components/expense-tracker/components/expenseList";
 import ExpenseFilter from "./components/expense-tracker/components/expenseFilter";
+import ExpenseForm from "./components/expense-tracker/components/expenseForm";
 // import HookForm from "./components/hookForm";
 
 // import ExpandableText from "./components/expandableText";
@@ -99,6 +100,9 @@ function App() {
 
       {/* <HookForm /> */}
 
+      <div className="mb-5">
+        <ExpenseForm onSubmit={expense => setExpenses([...expenses , {...expense, id: expenses.length+1}])} />
+      </div>
       <div className="mb-3">
         <ExpenseFilter
           onSelectCategory={(category) => setSelectedCategory(category)}
