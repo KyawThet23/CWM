@@ -4,11 +4,15 @@
 // import Alert from "./components/alert";
 // import ListGroup from "./components/listGroup";
 
-// import FormState from "./components/formState";
 import { useState } from "react";
-import ExpenseList from "./components/expense-tracker/components/expenseList";
-import ExpenseFilter from "./components/expense-tracker/components/expenseFilter";
-import ExpenseForm from "./components/expense-tracker/components/expenseForm";
+import ProductList from "./components/productList";
+// import UseEffect from "./components/useEffect";
+
+// import FormState from "./components/formState";
+// import { useState } from "react";
+// import ExpenseList from "./components/expense-tracker/components/expenseList";
+// import ExpenseFilter from "./components/expense-tracker/components/expenseFilter";
+// import ExpenseForm from "./components/expense-tracker/components/expenseForm";
 // import HookForm from "./components/hookForm";
 
 // import ExpandableText from "./components/expandableText";
@@ -56,18 +60,20 @@ function App() {
   //   console.log(item)
   // }
 
-  const [selectCategory, setSelectedCategory] = useState("");
+  // const [selectCategory, setSelectedCategory] = useState("");
 
-  const [expenses, setExpenses] = useState([
-    { id: 1, description: "aaa", amount: 1.5, category: "Groceries" },
-    { id: 2, description: "bbb", amount: 1.5, category: "Utilities" },
-    { id: 3, description: "ccc", amount: 1.5, category: "Entertainment" },
-    { id: 4, description: "ddd", amount: 1.5, category: "Entertainment" },
-  ]);
+  // const [expenses, setExpenses] = useState([
+  //   { id: 1, description: "aaa", amount: 1.5, category: "Groceries" },
+  //   { id: 2, description: "bbb", amount: 1.5, category: "Utilities" },
+  //   { id: 3, description: "ccc", amount: 1.5, category: "Entertainment" },
+  //   { id: 4, description: "ddd", amount: 1.5, category: "Entertainment" },
+  // ]);
 
-  const filterExpense = selectCategory
-    ? expenses.filter((e) => e.category === selectCategory)
-    : expenses;
+  // const filterExpense = selectCategory
+  //   ? expenses.filter((e) => e.category === selectCategory)
+  //   : expenses;
+
+  const [category,setCategory] = useState('');
 
   return (
     <div>
@@ -100,10 +106,10 @@ function App() {
 
       {/* <HookForm /> */}
 
-      <div className="mb-5">
+      {/* <div className="mb-5">
         <ExpenseForm onSubmit={expense => setExpenses([...expenses , {...expense, id: expenses.length+1}])} />
       </div>
-      <div className="mb-3">
+      <div className="mb-3">x
         <ExpenseFilter
           onSelectCategory={(category) => setSelectedCategory(category)}
         />
@@ -111,7 +117,17 @@ function App() {
       <ExpenseList
         expenses={filterExpense}
         onDelete={(id) => setExpenses(expenses.filter((e) => e.id != id))}
-      />
+      /> */}
+
+      {/* <UseEffect /> */}
+
+      <select className="form-select" onChange={(event => setCategory(event.target.value))}>
+        <option value=""></option>
+        <option value="Clothing">Clothing</option>
+        <option value="Household">Household</option>
+      </select>
+      <ProductList category={category} />
+
     </div>
   );
 }
