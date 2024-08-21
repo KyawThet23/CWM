@@ -10,7 +10,7 @@ const UseEffect = () => {
   })
 
   useEffect(() => {
-    document.title = 'My App'
+    document.title = 'My App Hello' 
   })
 
 

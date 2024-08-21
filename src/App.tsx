@@ -4,8 +4,10 @@
 // import Alert from "./components/alert";
 // import ListGroup from "./components/listGroup";
 
-import { useState } from "react";
-import ProductList from "./components/productList";
+import UserList from "./components/userList";
+
+// import { useState } from "react";
+// import ProductList from "./components/productList";
 // import UseEffect from "./components/useEffect";
 
 // import FormState from "./components/formState";
@@ -73,7 +75,7 @@ function App() {
   //   ? expenses.filter((e) => e.category === selectCategory)
   //   : expenses;
 
-  const [category,setCategory] = useState('');
+  // const [category,setCategory] = useState('');
 
   return (
     <div>
@@ -121,12 +123,14 @@ function App() {
 
       {/* <UseEffect /> */}
 
-      <select className="form-select" onChange={(event => setCategory(event.target.value))}>
+      {/* <select className="form-select" onChange={(event => setCategory(event.target.value))}>
         <option value=""></option>
         <option value="Clothing">Clothing</option>
         <option value="Household">Household</option>
       </select>
-      <ProductList category={category} />
+      <ProductList category={category} /> */}
+
+      <UserList />
 
     </div>
   );
