@@ -1,41 +1,51 @@
-import axios, { AxiosError, CanceledError } from "axios";
-import { useEffect, useState } from "react"
-
-interface User {
-  id: number,
-  name: string
-}
+import { useEffect, useState } from "react";
+import apiClient from "./services/api-client";
+import userService, { User } from "./services/user-service";
+import { CanceledError } from "axios";
 
 const UserList = () => {
-
-  const [users,setUsers] = useState<User[]>([]);
-  const [error,setErrors] = useState('');
+  const [users, setUsers] = useState<User[]>([]);
+  const [error, setErrors] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    
+    setIsLoading(true);
 
-    const fetchUsers = async () => {
-      try {
-        const res = await axios.get<User[]>('https://jsonplaceholder.typicode.com/users');
-        setUsers(res.data); 
-      } catch (error) {
-        if (error instanceof CanceledError) return;
-        setErrors((error as AxiosError).message);
-      }
-    }
+    const {request,cancel} = userService.getAllUsers();
+      request.then((res) => setUsers(res.data))
+      .catch((err) => {
+        if (err instanceof CanceledError) return
+        setErrors(err.message);
+      })
+      .finally(() => setIsLoading(false));
 
-    fetchUsers();
-    
-  } , [])
+      return () => cancel();
+  }, []);
+
+  const deleteUser = (user: User) => {
+    const originalUsers = [...users];
+    setUsers(users.filter(u => u.id !== user.id));
+    userService.deleteUser(user.id)
+        .catch(err => {
+          setErrors(err);
+          setUsers(originalUsers);
+        })
+  }
 
   return (
     <div>
-      { error && <p className="text-danger">{error}</p>}
-      <ul>
-        {users.map(user => <li key={user.id}>{user.name}</li>)}
+      {isLoading && <div className="spinner-border"></div>}
+      {error && <p className="text-danger">{error}</p>}
+      <ul className="list-group">
+        {users.map((user) => (
+          <li key={user.id} className="list-group-item d-flex justify-content-between">
+            {user.name}
+            <button className="btn btn-outline-danger" onClick={() => deleteUser(user)} >Delete</button>
+          </li>
+        ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default UserList
+export default UserList;
